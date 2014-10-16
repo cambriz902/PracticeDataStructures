@@ -1,91 +1,103 @@
-import java.util.*;
-public class BinaryTree {
+//Insert takes O(log(n))
+//Search takes O(log(n))
+//delete takes O(log(n))
 
-	Node root = new Node();
+public class BinaryTree{
 	
+	Node root;
+	Node curr;
+
 	class Node{
-		int data;
 		Node left;
 		Node right;
-		
+		int data;
+
 		public Node(int data){
+			this.left = null;
+			this.right = null;
 			this.data = data;
+		}
+
+		public Node(){
 			this.left = null;
 			this.right = null;
 		}
-		
-		public Node(){}
-		
+
 	}
-	
+
 	public BinaryTree(){
-		root = null;
+		this.root = null;
+		this.curr = null;
+	}
+
+	public void insert(int data){
+		Node newNode = new Node(data);
+		if(root == null){
+			root = newNode;
+		} else {
+			curr = root;
+			Node parent = new Node();
+			while(curr != null){
+				parent = curr;
+				if(newNode.data > curr.data) curr = curr.right;
+				else curr  = curr.left;
+			}
+			if(newNode.data > parent.data) parent.right = newNode;
+			else parent.left = newNode;
+		}
+	}
+
+	public boolean contains(int data){
+		if( isEmpty() ){
+			return false;
+		}
+		curr = root;
+		while(curr != null){
+			if(curr.data == data){
+				return true;
+			}
+			if(curr.data > data) curr = curr.left;
+			else curr = curr.right;
+		}
+		return false;
 	}
 	
+	public boolean isEmpty(){
+		if(root == null){
+			return true;
+		}
+		return false;
+	}
+
+	public void printPreOrder(Node node){
+		if(node == null){
+			return;
+		}
+		System.out.print(node.data + " ");
+		printPreOrder(node.left);
+		printPreOrder(node.right);
+	}
+
+	public void printInOrder(Node node){
+		if(node == null){
+			return;
+		}
+		printInOrder(node.left);
+		System.out.print(node.data + " ");
+		printInOrder(node.right);
+	}
+
+	public void printPostOrder(Node node){
+		if(node == null){
+			return;
+		}
+		printPostOrder(node.left);
+		printPostOrder(node.right);
+		System.out.print(node.data + " ");
+	}
+
 	public Node getRoot(){
 		return root;
 	}
-	public void insert(int data){
-		if(root == null){
-			root = new Node(data);
-		}else{
-			Node temp = root;
-			Node parent;
-			while(true){
-				parent = temp;
-				if(data < temp.data){
-					temp = temp.left;
-					if(temp == null){
-						parent.left = new Node(data);
-						return;
-					}
-				}else{
-					temp = temp.right;
-					if(temp == null){
-						parent.right = new Node(data);
-						return;
-					}
-				}
-			}
-		}
-	}
-	public void preOrderTraversal(Node root){
-		if(root == null) return;
-		System.out.println(root.data);
-		preOrderTraversal(root.left);
-		preOrderTraversal(root.right);
-	}
-	public void inOrderTraversal(Node root){
-		if(root == null) return;
-		inOrderTraversal(root.left);
-		System.out.println(root.data);
-		inOrderTraversal(root.right);
-	}
-	public void postOrderTraversal(Node root){
-		if(root == null) return;
-		postOrderTraversal(root.left);
-		postOrderTraversal(root.right);
-		System.out.println(root.data);
-	}
-	
-	//Return LCA in 1 pass
-	Node findLCA2(Node root, int data1, int data2){
-		if(root == null)return null;
-		
-		if(root.data == data1 || root.data == data2) return root;
-		
-		Node leftLCA = findLCA2(root.left,data1,data2);
-		Node rightLCA = findLCA2(root.right,data1,data2);
-		if(leftLCA != null)
-		System.out.println("leftLCA data =" +leftLCA.data);
-		if(rightLCA != null)
-		System.out.println("rightLCA data = "+ rightLCA.data);
-		if(leftLCA != null && rightLCA !=null) return root;
-		
-		return (leftLCA != null) ? leftLCA : rightLCA;
-	}
-	
-	int getNodeData(Node node){
-		return node.data;
-	}
+
 }

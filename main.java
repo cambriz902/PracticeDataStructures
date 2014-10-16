@@ -46,28 +46,7 @@ public class main {
 		Palindrome longestPalindrome = new Palindrome();
 		System.out.println("Longest Palindrome = " + longestPalindrome.findLongestPalindrome(test4));
 		
-		//test SortedLinkedList
-		int k = 3;
-		int[] testArray2 = {2,3,4,2,3,5,5,6,1,3,20};
-		SortedLinkedList findNumbers = new SortedLinkedList(k);
-		findNumbers.insert(2,2);
-		findNumbers.printList();
-		System.out.println("yolo");
-		findNumbers.insert(3,3);
-		findNumbers.printList();
-		System.out.println("yolo");
-		findNumbers.insert(4, 1);
-		findNumbers.printList();
-		System.out.println("yolo");
-		findNumbers.insert(5,2);
-		findNumbers.printList();
-		System.out.println("yolo");
-		findNumbers.insert(6,4);
-		findNumbers.printList();
-		System.out.println("yolo");
-		findNumbers.insert(20, 5);
-		findNumbers.printList();
-		*/
+
 		//test RepeatedIntegers
 		//number of integers to test
 		int k = 3;
@@ -79,6 +58,15 @@ public class main {
 		int[] answer = findRepeatedInegers.findIntegers(testArray2,k);
 		//prints contents of answer to make sure correct values are in order
 		printArray(answer);
+		
+		//test StringCaseCombinations
+		String testWord = "aBc";
+		StringCaseCombinations findCombinations = new StringCaseCombinations();
+		findCombinations.getCaseCombinations(testWord);
+		*/
+		
+		//test random shit
+		System.out.println(5/2);
 	}
 
 	
